@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "sharepointwebpart-client-side-solution",
+    "id": "42f9922f-8756-412a-8f62-6a2376cf0636",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.15.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "sharepointwebpart description"
+      },
+      "longDescription": {
+        "default": "sharepointwebpart description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "sharepointwebpart Feature",
+        "description": "The feature that activates elements of the sharepointwebpart solution.",
+        "id": "524f969a-63a6-43e9-9def-5d2618ae44db",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/sharepointwebpart.sppkg"
+  }
+}
