@@ -3,56 +3,46 @@ import styles from './Filter.module.scss';
 import { IFilterProps } from './IFilterProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { SPHttpClient } from '@microsoft/sp-http';
+import DetailsListDocumentsExample from './DetailsListDocumentExample';
 
 
-export default class Filter extends React.Component<IFilterProps, {}> {
-	list: any;
-	private async onGetListItemsClicked(event: React.MouseEvent<HTMLButtonElement>): Promise<void> {
-		event.preventDefault();
+export default class Filter extends React.Component<IFilterProps, { list: any }> {
 
-		this.list = await this.getListItems();
-		console.log(this.list);
 
-	}
+  constructor(props: IFilterProps) {
+    super(props);
 
-	public async getListItems() {
-		const response = await this.props.context.spHttpClient.get(
-			`https://elfodev.sharepoint.com/_api/web/lists`,
-			SPHttpClient.configurations.v1);
-		return (await response.json());
-	}
+    this.state = {
+      list: props.list
+    };
+  }
+  // private onGetListItemsClicked = async (event: React.MouseEvent<HTMLButtonElement>): Promise<void> => {
+  //   event.preventDefault();
 
-	public render(): React.ReactElement<IFilterProps> {
+  //   this.setState({list:}) = await this.getListItems();
+  //   console.log(this.list);
+  // }
 
-		const {
-			context,
-			description,
-			isDarkTheme,
-			environmentMessage,
-			hasTeamsContext,
-			userDisplayName
-		} = this.props;
 
-		return (
-			<section className={`${styles.filter} ${hasTeamsContext ? styles.teams : ''}`}>
-				<div className={styles.welcome}>
-					<img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
-					<h2>Well done, {escape(userDisplayName)}!</h2>
-					<div>{environmentMessage}</div>
-					<div>Web part property value: <strong>{escape(description)}</strong></div>
-				</div>
-				<div>
-					<h3>Welcome to SharePoint Framework!</h3>
-					<p>
-						The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It&#39;s the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
-					</p>
-					<h4>Learn more about SPFx development:</h4>
+  public render(): React.ReactElement<IFilterProps> {
 
-				</div>
-				<button type="button" onClick={this.onGetListItemsClicked}>LoadLists</button>
+    // const response = this.props.context.spHttpClient.get(
+    //   `https://elfodev.sharepoint.com/_api/web/lists/Items`,
+    //   SPHttpClient.configurations.v1)
+    //   .then(value => value.json())
+    //   .then(json => { this.setState({ list: json }) }
+    //   );
 
-			</section>
-		);
 
-	}
-} 
+    return (
+      <div>
+        {
+          this.state.list &&
+          <DetailsListDocumentsExample
+            list={this.state.list}
+            context={this.props.context} />
+        }
+      </div>
+    );
+  }
+}
